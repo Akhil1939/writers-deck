@@ -1,0 +1,47 @@
+.register{
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(255,255,255,0.5),
+    rgba(255,255,255,0.5)), url("https://source.unsplash.com/1600x1000/?blog,nature");
+    background-size: cover;
+}
+.register-title{
+    font-size: 50px;
+}
+.register-form{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.register-form > label{
+    margin: 10px 0;
+}
+.register-input{
+    padding: 10px;
+    background-color: white;
+    border: none;
+}
+.register-btn{
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: teal;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+
+}
+.register-login-btn{
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: lightcoral;
+    cursor: pointer;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
