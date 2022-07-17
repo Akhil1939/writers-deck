@@ -13,14 +13,17 @@ import {
 import { useContext } from 'react';
 import { Context } from './context/Context';
 // import Header from "./Header/Header";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify';
 
 function App() {
   const {user} = useContext(Context);
   return (
     <>
     <BrowserRouter>
+    <ToastContainer />
     <Topbar />
-    <Routes>
+    <Routes> 
       <Route path='/' element={<Home />}></Route>
       <Route path='/write' element={user ? <Write /> :<Login />}></Route>
       <Route path='/login' element={user ? <Home /> :<Login />}></Route>

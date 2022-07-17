@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Context } from '../../context/Context';
 import './Login.css';
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Login() {
 const userRef = useRef();
@@ -21,20 +22,24 @@ const { dispatch, isFetching} = useContext(Context)
         password :passwordRef.current.value,
       }).then((res)=>{
         // console.log(res.data);
+        toast.success("Login Successfully");
         dispatch({type:"Login_Success", payload: res.data});
         navigate('/');
         
+         
       })
 
-    }catch(err){
+    }catch(err){ 
       dispatch({type:"Login_Failure"});
+      toast.warn("Invalid Login credential")
 
     } 
   };
 console.log(isFetching)
 
-    return (
+    return ( 
     <div className='login'>
+     
         <form  className='login-form' onSubmit={handleSubmit}>
             <span className="login-title">Login</span>
             <label htmlFor="username">Username</label>

@@ -4,6 +4,8 @@ import { useContext } from 'react'
 import { useState } from 'react'
 import { Context } from '../../../context/Context'
 import './Write.css'
+import { toast} from 'react-toastify';
+
 
 export default function Write() {
     const [title, setTitle] = useState("")
@@ -34,10 +36,12 @@ export default function Write() {
         try {
             await axios.post("/posts", newPost).then((res) => {
                 window.location.replace("/post/" + res.data._id)
+            toast.success("Blog has been added")
             });
 
         } catch (err) {
             console.log(err);
+            toast.error("Error while writing blog")
         }
 
     }

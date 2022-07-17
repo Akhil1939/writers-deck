@@ -24,6 +24,7 @@ color: lightcoral;
 .settings-form{
     display: flex;
     flex-direction: column;
+    width: 50vw;
 }
 .settings-profile-picture{
     display: flex;
@@ -56,6 +57,7 @@ color: lightcoral;
     color: gray;
     font-size: 15px;
     /* text-align: center; */
+    padding-left: 15px;
     margin:10px 0;
     height: 30px;
     border-radius: 30px;
@@ -64,6 +66,7 @@ color: lightcoral;
 }
 .settings-submit{
     width: 150px;
+    height: 35px;
     align-self: center;
     border: none;
     border-radius: 10px;

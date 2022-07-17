@@ -4,6 +4,7 @@ import { useLocation, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useContext } from 'react';
 import { Context } from '../../context/Context';
+import { toast} from 'react-toastify';
 
 
 
@@ -38,9 +39,11 @@ export default function SinglePost() {
     try {
 
       await axios.delete(`/posts/${post._id}`, { data: { username: user.username } }).then(() => {
+        toast.success("Blog has been deleted")
         navigate('/');
       });
     } catch (err) {
+      toast.error("Error while deleting blog")
       console.log(err)
     }
 
@@ -58,10 +61,12 @@ export default function SinglePost() {
            desc
         }).then(()=>{
           setUpdateMode(false);
+          toast.success("Blog has been updated");
           
         })
     }catch(err){
       console.log(err);
+      toast.error("Error while updating blog")
     }
   }
   const url = `https://source.unsplash.com/1000x500/?${post.categories}`

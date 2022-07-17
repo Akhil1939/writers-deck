@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Register.css'
+import { toast, ToastContainer } from 'react-toastify';
+
 import axios from 'axios'
 
 export default function Register() {
@@ -18,6 +20,8 @@ export default function Register() {
         password,
         
       }).then((res)=>{
+        toast.success("Registration successfully")
+        toast.success("welcome to Writer's deck")
         res.data && window.location.replace("/login");
       });
     }catch(err){
