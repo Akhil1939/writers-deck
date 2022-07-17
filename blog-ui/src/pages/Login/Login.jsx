@@ -22,7 +22,7 @@ const { dispatch, isFetching} = useContext(Context)
         password :passwordRef.current.value,
       }).then((res)=>{
         // console.log(res.data);
-        toast.success("Login Successfully");
+        toast.success("Login Successfully...");
         dispatch({type:"Login_Success", payload: res.data});
         navigate('/');
         
