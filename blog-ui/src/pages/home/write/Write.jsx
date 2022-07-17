@@ -15,13 +15,13 @@ export default function Write() {
         e.preventDefault();
 
         const newPost = {
-            userName: user.userName,
+            username: user.username,
             title,
             desc
         };
         if (file) {
             const data = new FormData();
-            const filename = Date.now() + file.name; 
+            const filename = Date.now() + file.name;
             data.append("name", filename);
             data.append("file", file);
             newPost.photo = filename;
@@ -35,7 +35,7 @@ export default function Write() {
             await axios.post("/posts", newPost).then((res) => {
                 window.location.replace("/post/" + res.data._id)
             });
- 
+
         } catch (err) {
             console.log(err);
         }

@@ -7,9 +7,12 @@ const userRout = require("./routes/Users");
 const PostRout = require("./routes/Posts");
 const categoryRout = require("./routes/Categories");
 const multer = require("multer");
+const path = require("path")
 
 dotenv.config();
 app.use(express.json());
+app.use("/images", express.static(path.join(__dirname, "/images")))
+
 mongoose
   .connect(process.env.URL_DB)
   .then(console.log("Database connected"))

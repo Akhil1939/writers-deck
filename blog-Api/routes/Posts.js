@@ -11,10 +11,10 @@ router.post("/", async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-}); 
+});
 
 //update post
-router.put("/:id", async (req, res) => { 
+router.put("/:id", async (req, res) => {
   // const newPost = new Post(req.body);
   try {
     const post = await Post.findById(req.params.id);
@@ -54,8 +54,8 @@ router.delete("/:id", async (req, res) => {
       } else {
         res.status(401).json("you can update  only your post");
       }
-    } catch (err) {
-      res.status(500).json(err);
+    } catch (err) { 
+      res.status(500).json(err); 
     }
   });
 

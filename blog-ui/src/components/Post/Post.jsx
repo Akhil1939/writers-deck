@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 
 export default function Post({ post }) {
   const url = `https://source.unsplash.com/1000x500/?${post.categories[1]},${post.categories[0]}`
+  const PF ="http://localhost:5000/images/"
   return (
     <>
     <div className='post'>
       {post.photo ? 
-        <img className='post-img' src={url} alt="Post" /> :
+        <img className='post-img' src={PF + post.photo} alt="Post" /> :
         <img className='single-post-img' src={url} alt="Post"/>
       }
 
