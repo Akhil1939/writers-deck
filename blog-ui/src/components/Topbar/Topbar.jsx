@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Context } from '../../context/Context';
 import "./Topbar.css";
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,8 +13,8 @@ export default function Topbar() {
 
     const handleLogout = () => {
         dispatch({ type: "Logout" })
-        toast.success("logout successfully");
-        toast.success("we will wait for your next visit");
+        toast.success("logout successfully ");
+        toast.success("we will wait for your next visit ");
         Navigate('/')
 
 

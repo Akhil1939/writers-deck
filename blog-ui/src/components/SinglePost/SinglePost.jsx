@@ -39,11 +39,11 @@ export default function SinglePost() {
     try {
 
       await axios.delete(`/posts/${post._id}`, { data: { username: user.username } }).then(() => {
-        toast.success("Blog has been deleted")
+        toast.success("Blog has been deleted 🐱‍🏍")
         navigate('/');
       });
     } catch (err) {
-      toast.error("Error while deleting blog")
+      toast.error("Error while deleting blog ")
       console.log(err)
     }
 
@@ -61,7 +61,7 @@ export default function SinglePost() {
            desc
         }).then(()=>{
           setUpdateMode(false);
-          toast.success("Blog has been updated");
+          toast.success("Blog has been updated ");
           
         })
     }catch(err){

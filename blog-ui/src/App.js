@@ -12,14 +12,14 @@ import {
 } from "react-router-dom";
 import { useContext } from 'react';
 import { Context } from './context/Context';
-// import Header from "./Header/Header";
 import 'react-toastify/dist/ReactToastify.css';
-import { toast, ToastContainer } from 'react-toastify';
+import {ToastContainer } from 'react-toastify';
 
 function App() {
   const {user} = useContext(Context);
   return (
     <>
+    
     <BrowserRouter>
     <ToastContainer />
     <Topbar />

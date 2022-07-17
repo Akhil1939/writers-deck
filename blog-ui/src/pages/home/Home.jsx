@@ -5,7 +5,7 @@ import Header from '../../components/Header/Header';
 import Posts from '../../components/Posts/Posts';
 import SideBar from '../../components/sidebar/SideBar';
 import "./home.css";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -16,8 +16,6 @@ export default function Home() {
   useEffect(() => {
     const fetchPosts = async () => {
       await axios.get("/posts" + search).then(res => {
-        const posts = res.data;
-        // console.log(posts);
         setPosts(res.data)
 
       })
@@ -28,13 +26,11 @@ export default function Home() {
 
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <Header />
       <div className='home'>
         <Posts posts={posts} />
         <SideBar />
-
-
       </div>
     </>
   )

@@ -17,7 +17,7 @@ export default function Post({ post }) {
         <div className="post-cats">
           {post.categories.map((c) => {
             return (
-              <span className="post-cat">{[c]}</span>
+              <span key={post._id} className="post-cat">{[c]}</span>
             )
           })}
         </div>

@@ -22,7 +22,7 @@ const { dispatch, isFetching} = useContext(Context)
         password :passwordRef.current.value,
       }).then((res)=>{
         // console.log(res.data);
-        toast.success("Login Successfully...");
+        toast.success("Login Successfully... ");
         dispatch({type:"Login_Success", payload: res.data});
         navigate('/');
         
@@ -31,7 +31,7 @@ const { dispatch, isFetching} = useContext(Context)
 
     }catch(err){ 
       dispatch({type:"Login_Failure"});
-      toast.warn("Invalid Login credential")
+      toast.warn("Invalid Login credential ")
 
     } 
   };
@@ -43,7 +43,7 @@ console.log(isFetching)
         <form  className='login-form' onSubmit={handleSubmit}>
             <span className="login-title">Login</span>
             <label htmlFor="username">Username</label>
-            <input className='login-input' type="text" name="username" id="usernme" placeholder='Enter Your Username...' 
+            <input className='login-input' type="text" name="username" id="username" placeholder='Enter Your Username...' 
             ref={userRef}/>
 
             <label htmlFor="Password">Password</label>
