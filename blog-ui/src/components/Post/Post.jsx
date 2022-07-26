@@ -10,7 +10,7 @@ export default function Post({ post }) {
     <div className='post'>
       {post.photo ? 
         <img className='post-img' src={PF + post.photo} alt="Post" /> :
-        <img className='single-post-img' src={url} alt="Post"/>
+        <img className='post-img' src={url} alt="Post"/>
       }
 
       <div className="post-info">
@@ -20,7 +20,7 @@ export default function Post({ post }) {
               <span key={post._id} className="post-cat">{[c]}</span>
             )
           })}
-        </div>
+        </div> 
         <Link className='link' to={`/post/${post._id}`}>
 
           <span className="post-title">{post.title} </span>

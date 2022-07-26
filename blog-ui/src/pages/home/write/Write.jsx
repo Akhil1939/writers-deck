@@ -63,6 +63,11 @@ export default function Write() {
 
                     <input value={title} className='write-input' type="text" placeholder='Title' autoFocus={true} onChange={e => setTitle(e.target.value)} />
                 </div>
+                <div className="write-form-category">
+                    <div className="write-form-category-group">
+                        
+                    </div>
+                </div>
                 <div className="write-form-group">
                     <textarea value={desc} className='write-input write-text' placeholder='Tell Your Story' type="text" onChange={e => setDesc(e.target.value)}></textarea>
                 </div>
