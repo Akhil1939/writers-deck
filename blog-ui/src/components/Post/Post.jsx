@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 
 export default function Post({ post }) {
   const url = `https://source.unsplash.com/1000x500/?${post.categories[1]},${post.categories[0]}`
-  const PF ="http://localhost:5000/images/"
   return (
     <>
     <div className='post'>
       {post.photo ? 
-        <img className='post-img' src={PF + post.photo} alt="Post" /> :
+        <img className='post-img' src={post.photo} alt="Post" /> :
         <img className='post-img' src={url} alt="Post"/>
       }
 
@@ -26,10 +25,11 @@ export default function Post({ post }) {
           <span className="post-title">{post.title} </span>
         </Link>
         <hr />
-        <span className="post-date">{post.createdAt}</span>
+        <span className="post-date">{post.updatedAt}</span>
       </div>
       <div className="post-desc">{post.desc}</div>
     </div>
     </>
   )
 }
+ 

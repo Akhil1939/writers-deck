@@ -76,7 +76,7 @@ export default function SinglePost() {
         {
 
           post.photo ?
-            <img className='single-post-img' src={PF + post.photo} alt="Post" /> :
+            <img className='single-post-img' src={post.photo} alt="Post" /> :
             <img className='single-post-img' src={url} alt="Post" />
 
         }

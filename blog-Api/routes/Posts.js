@@ -36,7 +36,7 @@ router.put("/:id", async (req, res) => {
     }
   } catch (err) {
     res.status(500).json(err);
-  }
+  } 
 });
 
 // Delete
@@ -77,7 +77,7 @@ router.get("/", async (req, res) => {
         let posts;
 if(username){
     posts = await Post.find({username})
-}else if(catName){
+}else if(catName){ 
     posts = await Post.find({categories:{
         $in:[catName]
     }})

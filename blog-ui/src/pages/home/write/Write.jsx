@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useContext } from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Context } from '../../../context/Context'
 import './Write.css'
 import { toast} from 'react-toastify';
@@ -10,7 +10,8 @@ import { toast} from 'react-toastify';
 export default function Write() {
     const [title, setTitle] = useState("")
     const [desc, setDesc] = useState("")
-    const [file, setFile] = useState(null)
+    const [photo, setPhoto] = useState("")
+    const [categories, setCategories] = useState([]);
     const { user } = useContext(Context)
 
     const handleSubmit = async (e) => {
@@ -19,20 +20,11 @@ export default function Write() {
         const newPost = {
             username: user.username,
             title,
-            desc
+            desc,
+            photo,
+            categories
         };
-        if (file) {
-            const data = new FormData();
-            const filename = Date.now() + file.name;
-            data.append("name", filename);
-            data.append("file", file);
-            newPost.photo = filename;
-            try {
-                await axios.post("/upload", data)
-            } catch (err) {
-                console.log(err)
-            }
-        }
+       
         try {
             await axios.post("/posts", newPost).then((res) => {
                 window.location.replace("/post/" + res.data._id)
@@ -45,11 +37,41 @@ export default function Write() {
         }
 
     }
+    const  upload = (e)=> {
+        // check max. file size is not exceeded
+        // size is in bytes
+        if (e.size > 2000000) {
+          console.log("File too large");
+          return;
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+    
+        reader.onload = () => {
+          // console.log(reader.result); //base64encoded string
+          setPhoto(reader.result)
+        };
+        reader.onerror = error => {
+          console.log("Error: ", error);
+        };  
+      }
+      const [cats, setCat] = useState(([]));
+      const getCats = async () => {
+          await axios.get("/categories").then((res) => {
+              setCat(res.data)
+              // console.log(res.data)
+          }).catch((e) => { console.log(e) })
+      }
+  
+      useEffect(() => {
+          
+          getCats();  
+      },[])
     return (
         <div className='write'>
             {
-                file && (
-                    <img className='write-img' src={URL.createObjectURL(file)} alt="" />
+                photo && ( 
+                    <img className='write-img' src={photo} alt="" />
                 )
 
             }
@@ -58,10 +80,21 @@ export default function Write() {
                 <div className="write-form-group">
                     <label htmlFor="file-input"><i className="write-form-file-icon fa-solid fa-plus"></i></label>
                     <input type="file" id='file-input' style={{ display: "none" }}
-                        onChange={e => setFile(e.target.files[0])}
+                        onChange={upload}
                     />
 
                     <input value={title} className='write-input' type="text" placeholder='Title' autoFocus={true} onChange={e => setTitle(e.target.value)} />
+                    <div className="write-cat">
+                        <select name="cat-1" id="" defaultValue="Category">
+                            {cats.map((c) => (
+                        
+                            <option value={c.name} className="sidebar-list-item" onClick={e=> setCategories(e.target.value,0)}>{c.name}</option>
+                        
+ 
+                    ))}
+                        </select>
+                       
+                    </div>
                 </div>
                 <div className="write-form-category">
                     <div className="write-form-category-group">

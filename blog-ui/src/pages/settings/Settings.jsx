@@ -9,13 +9,13 @@ import './Settings.css'
 import { useNavigate } from 'react-router'
 
 export default function Settings() {
-    const PF = "http://localhost:5000/images/"
     const navigate = useNavigate();
     const { user, dispatch } = useContext(Context)
-    const [file, setFile] = useState(null)
+    let [profilePic, setProfilePic] = useState("")
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [updatePic, setUpdatePic] = useState(false)
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch({ type: "Update_start" })
@@ -23,20 +23,9 @@ export default function Settings() {
             userId: user._id,
             username,
             email,
-            password
+            password,
+            profilePic,
         };
-        if (file) {
-            const data = new FormData();
-            const filename = Date.now() + file.name;
-            data.append("name", filename);
-            data.append("file", file);
-            updatedUser.profilePic = filename;
-            try {
-                await axios.post("/upload", data)
-            } catch (err) {
-                console.log(err)
-            }
-        }
         try {
             await axios.put("/users/" + user._id, updatedUser).then((res) => {
                 dispatch({ type: "Update_Success", payload: res.data })
@@ -48,6 +37,29 @@ export default function Settings() {
             dispatch({ type: "Update_Failure" })
             toast.error("something went wrong ")
         }
+
+    }
+
+    const update = (e) => {
+        setProfilePic(false);
+        // check max. file size is not exceeded
+        // size is in bytes
+        if (e.size > 2000000) {
+            console.log("File too large");
+            return;
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+
+        reader.onload = () => {
+            // console.log(reader.result); //base64encoded string
+            setProfilePic(reader.result);
+            setUpdatePic(true)
+
+        };
+        reader.onerror = error => {
+            console.log("Error: ", error);
+        };
 
     }
 
@@ -74,29 +86,33 @@ export default function Settings() {
                 <form className="settings-form" onSubmit={handleSubmit}>
                     <label htmlFor="">Profile Picture</label>
                     <div className="settings-profile-picture">
-                        <img src={file ? URL.createObjectURL(file) : PF + user.profilePic} alt="" />
+                        {updatePic ?
+                            <img src={profilePic} alt="" /> :
+                            <img src={user.profilePic} alt="" />
+
+                        }
                         <label htmlFor="file-input"><i className="settings-profile-icon fa-solid fa-circle-user"></i></label>
                         <input
                             type="file"
                             id='file-input'
                             style={{ display: "none" }}
-                            onChange={e => setFile(e.target.files[0])}
+                            onChange={update}
                         />
                     </div>
-                    <label htmlFor="">User Name</label>
+                    <label htmlFor="username">User Name</label>
                     <input
                         type="text"
-                        value={user.username}
+                        placeholder={user.username}
                         onChange={e => setUsername(e.target.value)}
                     />
 
-                    <label htmlFor="">email</label>
+                    <label htmlFor="email">email</label>
                     <input
                         type="email"
-                        value={user.email}
+                        placeholder={user.email}
                         onChange={e => setEmail(e.target.value)} />
 
-                    <label htmlFor="">Password</label>
+                    <label htmlFor="password">Password</label>
                     <input
                         type="password"
                         onChange={e => setPassword(e.target.value)} />

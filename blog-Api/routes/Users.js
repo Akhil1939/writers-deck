@@ -21,14 +21,14 @@ router.put("/:id", async (req, res) => {
     }
   } else {
     res.status(401).json("You can Update only your Account!");
-  }
+  } 
 });
 
 // Delete
 
 router.delete("/:id", async (req, res) => {
     if (req.body.userId === req.params.id) {
-        try{
+        try{ 
             const user = await User.findById(req.params.id);
             try{
                 await Post.deleteMany({username:user.username});

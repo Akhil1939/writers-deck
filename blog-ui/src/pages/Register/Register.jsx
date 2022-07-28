@@ -9,6 +9,7 @@ export default function Register() {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [profilePic, setProfilePic] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,27 +17,54 @@ export default function Register() {
 
       await axios.post("/auth/register", {
         username,
-        email,
+        email, 
         password,
+        profilePic,
 
       }).then((res) => {
         toast.success("Registration successfully ")
         toast.success("welcome to Writer's deck ")
-        res.data && window.location.replace("/login");
+        // res.data && window.location.replace("/login");
+        // console.log(profilePic);
       });
     } catch (err) {
       console.log(err)
       toast.error("Error while register")
     }
   };
+const  convert = (e)=> {
+    // check max. file size is not exceeded
+    // size is in bytes
+    if (e.size > 2000000) {
+      console.log("File too large");
+      return;
+    }
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
 
-  return (
+    reader.onload = () => {
+      // console.log(reader.result); //base64encoded string
+      setProfilePic(reader.result)
+    };
+    reader.onerror = error => {
+      console.log("Error: ", error);
+    };  
+  }
+
+  return ( 
     <div className='register'>
       <form
         className='register-form'
         onSubmit={handleSubmit}
       >
         <span className="register-title">Register</span>
+        <input
+          type="file"
+          label="Image"
+          name="myFile"
+          accept=".jpeg, .png, .jpg"
+          onChange={convert}
+        />
         <label htmlFor="userName">UserName</label>
         <input
           className='register-input'
