@@ -18,16 +18,11 @@ app.use("/images", express.static(path.join(__dirname, "/images")))
 mongoose
   .connect(process.env.URL_DB)
   .then(console.log("Database connected"))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err))
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "images");
-  },
-  filename: (req, file, cb) => {
-    cb(null, req.body.name);
-  },
-});
+
+  
+
 const upload = multer({ storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json("file has been upload...");

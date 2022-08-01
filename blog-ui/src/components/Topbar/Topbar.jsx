@@ -9,8 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Topbar() {
     const { user, dispatch } = useContext(Context);
     // const navigate
-    const PF = "http://localhost:5000/images/"
-
     const handleLogout = () => {
         dispatch({ type: "Logout" })
         toast.success("logout successfully ");
