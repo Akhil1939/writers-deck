@@ -8,14 +8,9 @@
   font-family: "Josefin Sans", sans-serif;
   color: #444;
 }
-.header-title-sm {
-  position: absolute;
-  top: 18%;
-  font-size: 20px;
-}
 .header-title-lg {
   position: absolute;
-  top: 20%;
+  top: 5%;
   font-family: "Lora", serif;
   font-style: italic;
   font-size: 90px;
@@ -23,6 +18,6 @@
 .header-img {
   width: 100%;
   height: 450px;
-  margin-top: 80px;
+  /* margin-top: px; */
   object-fit: cover;
 }

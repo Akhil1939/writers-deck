@@ -8,6 +8,7 @@ const PostRout = require("./routes/Posts");
 const categoryRout = require("./routes/Categories");
 const multer = require("multer");
 const path = require("path")
+const storage = "./images"
 
 dotenv.config();
 // app.use(express.json());
@@ -19,9 +20,6 @@ mongoose
   .connect(process.env.URL_DB)
   .then(console.log("Database connected"))
   .catch((err) => console.log(err))
-
-
-  
 
 const upload = multer({ storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
